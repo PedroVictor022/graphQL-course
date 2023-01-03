@@ -19,12 +19,12 @@ const allUsers = [
 
 const allProducts = [
   {
-    id: 123123,
+    id: 1,
     name: 'Macbook M1',
     value: 7999
   },
   {
-    id: 123124,
+    id: 2,
     name: 'Macbook M2',
     value: 20899
   }
@@ -48,27 +48,35 @@ const typeDefs = gql`
   }
 
   type Query {
-    user: User
-    allUser: [User!]!
-    product: Product
-    allProducts: [Product!]!
+    users: [User]
+    products: [Product]
+    user(id: Int, name: String): User!
+    product(id: Int, name: String): Product!
   }
 `;
 // Create resolver query
 const resolvers = {
   Query: {
-    user: () => {
-      return user1;
-    },
-    allUser: () => {
+    users: () => {
       return allUsers
     },
-    product: () => {
+    products: () => {
       return allProducts
     },
-    allProducts: () => {
-      return allProducts
+    /**
+     * ARGUMENTS (obj, args)
+     */
+    user: (_, args) => {
+      const { id, name } = args;
+      if(id) return allUsers.find(user => user.id === id);
+      return allUsers.find(user => user.name === name);
+    },
+    product: (_, args) => {
+      const { id, name } = args;
+      if(id) return allProducts.find(product => product.id === id);
+      return allProducts.find(product => product.name === name);
     }
+
   }
 }
 
