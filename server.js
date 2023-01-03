@@ -8,7 +8,8 @@ const typeDefs = gql`
     cash: Float
     name: String
     active: Boolean
-    id: ID
+    id: ID,
+    techs: [String!]!
   }
 `;
 
@@ -29,6 +30,9 @@ const resolvers = {
     },
     id: () => {
       return 9;
+    },
+    techs: () => {
+      return ['Javascript', 'C++', 'Typescript'];
     }
   }
 }
