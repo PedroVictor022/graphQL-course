@@ -1,46 +1,83 @@
 const { gql, ApolloServer } = require('apollo-server');
 
+const allUsers = [
+  {
+    id: 1,
+    name: 'Pedro',
+    age: 24,
+    cash: 13.000,
+    active: true
+  },
+  {
+    id: 2,
+    name: 'Luiza',
+    age: 22,
+    cash: 11.000,
+    active: true
+  }
+]
+
+const allProducts = [
+  {
+    id: 123123,
+    name: 'Macbook M1',
+    value: 7999
+  },
+  {
+    id: 123124,
+    name: 'Macbook M2',
+    value: 20899
+  }
+]
+
 // Create a Query
 const typeDefs = gql`
   # Ponto de entrada para pesquisas 
-  type Query {
+  type User {
     age: Int
     cash: Float
     name: String
     active: Boolean
     id: ID,
-    techs: [String!]!
+  }
+
+  type Product {
+    id: ID,
+    name: String,
+    value: Float
+  }
+
+  type Query {
+    user: User
+    allUser: [User!]!
+    product: Product
+    allProducts: [Product!]!
   }
 `;
-
 // Create resolver query
 const resolvers = {
   Query: {
-    age: () => {
-      return 21;
+    user: () => {
+      return user1;
     },
-    cash: () => {
-      return 7.800;
+    allUser: () => {
+      return allUsers
     },
-    name: () => {
-      return 'Pedro Victor';
+    product: () => {
+      return allProducts
     },
-    active: () => {
-      return true;
-    },
-    id: () => {
-      return 9;
-    },
-    techs: () => {
-      return ['Javascript', 'C++', 'Typescript'];
+    allProducts: () => {
+      return allProducts
     }
   }
 }
 
+
+
 console.log(resolvers);
 
 const server = new ApolloServer({
-  typeDefs, 
+  typeDefs,
   resolvers
 });
 
