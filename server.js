@@ -1,5 +1,7 @@
 const { gql, ApolloServer } = require('apollo-server');
 
+// REVISAO DE CONTEUDO AMANHA
+
 const allUsers = [
   {
     id: 1,
