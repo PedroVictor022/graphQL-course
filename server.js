@@ -24,7 +24,8 @@ const typeDefs = gql`
     name: String
     active: Boolean
     id: ID,
-    users: [String!]! 
+    techs: [String!]!
+    # users: [String!]! 
     # [String]! o array nao pode estar vazio
   }
 `;
@@ -47,8 +48,17 @@ const resolvers = {
     id: () => {
       return 01;
     },
-    users: () => {
-      return users
+    // users: () => {
+    //   return users
+    // },
+    techs: () => {
+      return [
+        'GraphQL',
+        'Javascript',
+        'Python',
+        1, 
+        2,
+      ]
     }
   }
 }
