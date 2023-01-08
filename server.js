@@ -1,6 +1,19 @@
 const { gql, ApolloServer } = require('apollo-server');
 // Review content
 
+const users = [
+  {
+    id: '1',
+    name: 'Pedro Victor',
+    age: '20'
+  },
+  {
+    id: '2',
+    name: 'Luiza',
+    age: '20'
+  }
+]
+
 // Create a Query
 const typeDefs = gql`
   # Ponto de entrada para pesquisas 
@@ -11,6 +24,8 @@ const typeDefs = gql`
     name: String
     active: Boolean
     id: ID,
+    users: [String!]! 
+    # [String]! o array nao pode estar vazio
   }
 `;
 // Create resolver query
@@ -31,6 +46,9 @@ const resolvers = {
     },
     id: () => {
       return 01;
+    },
+    users: () => {
+      return users
     }
   }
 }
