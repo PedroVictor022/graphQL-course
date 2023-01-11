@@ -66,9 +66,7 @@ const resolvers = {
    }
   }
 }
-
-
-
+// Review 11/01/23
 console.log(resolvers);
 
 const server = new ApolloServer({
